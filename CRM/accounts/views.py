@@ -34,7 +34,8 @@ def customer(request,pk_test):
     orders=customer.order_set.all()
     orders_count=orders.count()
 
-    myFilter = OrderFilter 
+    myFilter = OrderFilter(request.GET,queryset=orders)
+    orders=myFilter.qs 
 
     context={
         'customer':customer,
