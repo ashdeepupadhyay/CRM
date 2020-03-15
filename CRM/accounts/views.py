@@ -5,7 +5,10 @@ from .forms import OrderForm,CreateUserForm
 from django.forms import inlineformset_factory
 from .filters import OrderFilter
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
+from django.contrib import messages
+#https://docs.djangoproject.com/en/3.0/ref/contrib/messages/#using-messages-in-views-and-templates
 # Create your views here.
 def registerPage(request):
     form=CreateUserForm()
@@ -15,6 +18,8 @@ def registerPage(request):
         if form.is_valid():
             print("hii")
             form.save()
+            user =form.cleaned_data.get('username')
+            messages.success(request,"Account was created for "+user)
             return redirect('/login')
 
     context={ 
