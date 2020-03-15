@@ -10,8 +10,12 @@ urlpatterns = [
 
     path('',views.home,name='home'),
     path('user/',views.userPage,name='user_ page'),
+
+    path('account/',views.accountSettings,name="account"),
+
     path('customer/<str:pk_test>',views.customer,name='customer'),
     path('products/',views.products,name='products'),
+
 
     path('create_order/<str:pk>',views.createOrder,name='create_order'),
     path('update_order/<str:pk>',views.updateOrder,name='update_order'),
