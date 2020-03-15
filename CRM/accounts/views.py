@@ -15,6 +15,7 @@ def registerPage(request):
         if form.is_valid():
             print("hii")
             form.save()
+            return redirect('/login')
 
     context={ 
         'form':form
