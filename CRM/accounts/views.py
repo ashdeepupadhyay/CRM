@@ -5,9 +5,9 @@ from .forms import OrderForm,CreateUserForm
 from django.forms import inlineformset_factory
 from .filters import OrderFilter
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 
-from django.contrib import messages
 #https://docs.djangoproject.com/en/3.0/ref/contrib/messages/#using-messages-in-views-and-templates
 # Create your views here.
 def registerPage(request):
@@ -28,6 +28,18 @@ def registerPage(request):
     return render(request,'accounts/register.html',context)
 
 def loginPage(request):
+
+    if request.method=="POST":
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
+
+        if user is not None:
+            login(request,user)
+            return redirect('/')
+        else:
+            messages.info(request,"Username or password is incorrect")
+
     context={
 
     }
